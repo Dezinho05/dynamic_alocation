@@ -1,13 +1,3 @@
-/*
- ============================================================================
- Name        : AlocacaoDinamica.c
- Author      : 
- Version     :
- Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
- ============================================================================
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -32,22 +22,39 @@ int main(void) {
 		while(*storage <= 0){
 			scanf("%i", *storage);
 			if(*storage <= 0){
-				printf("Invalido.\nDigite novamente:");
-			}
+				printf("Invalido.\nDigite novamente: ");
+			}	
 		}
+		*storage++;
+
 		for(int x = 0; x < qtProd; x++){
 			print("Informe o valor do %i° produto em estoque:", i+x);
 			while(*prcUn <= 0){
 				scanf("%f", *prcUn);
 				if(*prcUn <= 0){
-					printf("Invalido.\nDigite novamente:");
+					printf("Invalido.\nDigite novamente: ");
 				}
 			}
 		}
-
+		*prcUn++;
 	}
 
+	*storage -= qtProd;
+	*prcUn -= qtProd;
 
+	float sum = 0;
+
+	for (int i = 0; i < qtProd; i++){
+
+		printf("O %i° produto, possui: %i itens, e um valor unitário %f. Totalizando: %lf.", i, *storage, *prcUn, (float)(*storage * *prcUn));
+		
+		*storage++;
+		*prcUn++;
+		
+		sum = sum + (*storage * *prcUn);
+	}
+	printf("Valor total de mercadoria: %lf.", sum);
+}
 
 
 

@@ -8,52 +8,50 @@ int main(void) {
 
 	printf("Insira a quantidade de produtos (inteiro e positivo):");
 	do{
-		scanf("%i", qtProd);
+		scanf("%i", &qtProd);
 		if(qtProd <= 0) {
 			printf("Invalido.\nDigite novamente:");
 		}
 	}while(qtProd <= 0);
 
-	int *storage = (int*) malloc(qtProd, sizeof(int));
-	float *prcUn = (double*) malloc(qtProd, sizeof(double));
+	int *storage = (int*) malloc(qtProd * sizeof(int));
+	float *prcUn = (float*) malloc(qtProd * sizeof(float));
 
 	for (int i = 0; i < qtProd; i++){
-		print("Informe a quantidade de produtos em estoque, do %i° produto:", i+1);
+		printf("Informe a quantidade de produtos em estoque, do %i° produto:", i+1);
 		while(*storage <= 0){
-			scanf("%i", *storage);
+			scanf("%i", storage);
 			if(*storage <= 0){
 				printf("Invalido.\nDigite novamente: ");
 			}	
 		}
-		*storage++;
+		storage++;
 
-		for(int x = 0; x < qtProd; x++){
-			print("Informe o valor do %i° produto em estoque:", i+x);
-			while(*prcUn <= 0){
-				scanf("%f", *prcUn);
-				if(*prcUn <= 0){
-					printf("Invalido.\nDigite novamente: ");
-				}
+		printf("Informe o valor do %i° produto em estoque:", i+1);
+		while(*prcUn <= 0){
+			scanf("%f", prcUn);
+			if(*prcUn <= 0){
+				printf("Invalido.\nDigite novamente: ");
 			}
 		}
-		*prcUn++;
+		prcUn++;
 	}
-
-	*storage -= qtProd;
-	*prcUn -= qtProd;
+	printf("Esse é o valor do 'storage'%p\n", storage);
+	printf("Esse é o valor do 'prcUn'%p\n", prcUn);
+	storage -= qtProd;
+	prcUn -= qtProd;
+	printf("Esse é o valor do '*storage'%i\n", *storage);
+	printf("Esse é o valor do '*prcUn'%f\n", *prcUn);
 
 	float sum = 0;
 
 	for (int i = 0; i < qtProd; i++){
 
-		printf("O %i° produto, possui: %i itens, e um valor unitário %f. Totalizando: %lf.", i, *storage, *prcUn, (float)(*storage * *prcUn));
-		
-		*storage++;
-		*prcUn++;
-		
-		sum = sum + (*storage * *prcUn);
+		printf("O %i° produto, possui: %i itens, e um valor unitário %f.\nTotalizando: %lf.\n", i+1, *storage, *prcUn, (storage[i] * prcUn[i]));
+				
+		sum += storage[i] * prcUn[i];
 	}
-	printf("Valor total de mercadoria: %lf.", sum);
+	printf("Valor total de mercadoria: %lf.\n", sum);
 }
 
 
